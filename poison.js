@@ -128,6 +128,14 @@
         }
       });
 
+      element = document.querySelector('.react-tabs_react-tabs__tab-list_17Wee');
+      if (element) {
+        element.parentNode.removeChild(element);
+        console.log('div with class react-tabs_react-tabs__tab-list_17Wee has been deleted');
+      } else {
+        console.log('div with class react-tabs_react-tabs__tab-list_17Wee not found');
+      }
+
       var disabledButton = document.querySelector('button.gui_add-tab-button_DxpA3.gui_add-tab-button-disabled_3sVlw');
       if (disabledButton) {
         disabledButton.remove();
@@ -167,7 +175,7 @@
           console.log('%c ', css);
         }
 
-        var version = "1.0.0";
+        var version = "1.1.0";
         console.log('%cＥｄｉｔｏｒ　Ｐｏｉｓｏｎ', 'color: lime; font-size: 20px; padding: 5px;');
         trollface();
         console.log('%c v' + version, 'color: green; font-size: 10px; padding: 5px;');
