@@ -267,7 +267,7 @@
       var loopCounter = 0;
 
       const payloads = [
-        { func: changeFontStyle, severity: 2 },
+        { func: changeFontStyle, severity: 1 },
         { func: rotateElements, severity: 5 },
         { func: invertColors, severity: 3 },
         { func: addRandomBorders, severity: 3 },
