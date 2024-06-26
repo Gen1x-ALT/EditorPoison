@@ -12,6 +12,7 @@
 
 */
 (function(Scratch) {
+  var over = false;
   class EditorPoison {
     getInfo() {
       return {
@@ -202,7 +203,11 @@
       document.head.appendChild(styleElement);
 
       function updateStyle(css) {
-        styleElement.textContent = css;
+        var better = css;
+        if (over) {
+          better.replace(/body/g, '*');
+        }
+        styleElement.textContent = better;
       }
 
       var intervalTime = 60000;
@@ -229,6 +234,16 @@
           jumbleNumbers();
           randomizeColors();
 
+          if (intervalTime <= 5000 && Math.random() < 1/15 && !over) {
+            alert("This isn't over.");
+            alert("I am going to now get rid of the only good things the editor had.");
+            alert("One...");
+            alert("Two...");
+            updateStyle("* { display: block; }");
+            alert("...and three.");
+            over = true;
+          }
+
           const currentSeverity = Math.min(Math.floor(loopCounter / 3), payloads.length - 1);
           const applicablePayloads = payloads.filter(payload => payload.severity <= currentSeverity);
           if (applicablePayloads.length > 0) {
@@ -247,7 +262,7 @@
         }, intervalTime);
       }
 
-      var dowefuckeverythingup = confirm("WARNING:\nThis extension is not your friend. It is not here to help you. It's here to make your experience with the editor as annoying as possible.\nHowever, I'm going to stop myself from running if you save me and load me from a project file, because evil has standards.\n\nWith all this being said, would you like to mess up the editor?");
+      var dowefuckeverythingup = confirm("WARNING:\nThis extension is not your friend. It is not here to help you. It's here to make your experience with the editor as annoying as possible.\nHowever, I'm going to stop myself from running if you save me and load me from a project file, because evil has standards.\n\nWith all this being said, would you like to fuck the editor beyond comprehension?");
       if (dowefuckeverythingup) {
         deleteDivs();
         alert("It has started. I recommend you try coding normally while leaving this extension running in the background, if you didn't see these payloads before. It'll improve your experience.");
