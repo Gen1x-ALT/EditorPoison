@@ -13,6 +13,12 @@
 */
 (function(Scratch) {
   var over = false;
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = 'https://csshake.surge.sh/csshake.min.css';
+
+  document.head.appendChild(link);
   class EditorPoison {
     getInfo() {
       return {
@@ -39,12 +45,52 @@
   Scratch.extensions.register(new EditorPoison());
 
   function deleteDivs() {
-    var element = document.querySelector('.menu-bar_main-menu_3wjWH');
+    var element = document.querySelector('.stage-header_embed-buttons_2Q7nj');
+    if (element) {
+      element.parentNode.removeChild(element);
+      console.log('div with class stage-header_embed-buttons_2Q7nj has been deleted');
+    } else {
+      console.log('div with class stage-header_embed-buttons_2Q7nj not found');
+    }
+
+    element = document.querySelector('.menu-bar_main-menu_3wjWH');
     if (element) {
       element.parentNode.removeChild(element);
       console.log('div with class menu-bar_main-menu_3wjWH has been deleted');
     } else {
       console.log('div with class menu-bar_main-menu_3wjWH not found');
+    }
+
+    element = document.querySelector('.sprite-selector_scroll-wrapper_3NNnc');
+    if (element) {
+      element.parentNode.removeChild(element);
+      console.log('div with class sprite-selector_scroll-wrapper_3NNnc has been deleted');
+    } else {
+      console.log('div with class sprite-selector_scroll-wrapper_3NNnc not found');
+    }
+
+    element = document.querySelector('.target-pane_stage-selector-wrapper_qekSW');
+    if (element) {
+      element.parentNode.removeChild(element);
+      console.log('div with class target-pane_stage-selector-wrapper_qekSW has been deleted');
+    } else {
+      console.log('div with class target-pane_stage-selector-wrapper_qekSW not found');
+    }
+
+    element = document.querySelector('.gui_extension-button-container_b4rCs');
+    if (element) {
+      element.parentNode.removeChild(element);
+      console.log('div with class gui_extension-button-container_b4rCs has been deleted');
+    } else {
+      console.log('div with class gui_extension-button-container_b4rCs not found');
+    }
+
+    element = document.querySelector('.action-menu_menu-container_3a6da');
+    if (element) {
+      element.parentNode.removeChild(element);
+      console.log('div with class action-menu_menu-container_3a6da has been deleted');
+    } else {
+      console.log('div with class action-menu_menu-container_3a6da not found');
     }
 
     element = document.querySelector('.gui_menu-bar-position_3U1T0');
@@ -178,22 +224,7 @@
       }
 
       function shakePage() {
-        const keyframes = `
-          @keyframes shake {
-            0% { transform: translate(1px, 1px) rotate(0deg); }
-            10% { transform: translate(-1px, -2px) rotate(-1deg); }
-            20% { transform: translate(-3px, 0px) rotate(1deg); }
-            30% { transform: translate(3px, 2px) rotate(0deg); }
-            40% { transform: translate(1px, -1px) rotate(1deg); }
-            50% { transform: translate(-1px, 2px) rotate(-1deg); }
-            60% { transform: translate(-3px, 1px) rotate(0deg); }
-            70% { transform: translate(3px, 1px) rotate(-1deg); }
-            80% { transform: translate(-1px, -1px) rotate(1deg); }
-            90% { transform: translate(1px, 2px) rotate(0deg); }
-            100% { transform: translate(1px, -2px) rotate(-1deg); }
-          }
-        `;
-        updateStyle(`body { animation: shake 0.5s; animation-iteration-count: infinite; } ${keyframes}`);
+        document.body.classList.add('shake-constant', 'shake-crazy');
         console.log('shaking the page');
       }
 
@@ -220,7 +251,13 @@
       function updateStyle(css) {
         var better = css;
         if (over) {
-          better.replace(/body/g, '*');
+          better = css.replace(/body/g, '*');
+          better = better + " * { display: block; }";
+          const allElements = document.querySelectorAll('*');
+
+          allElements.forEach(element => {
+              element.style.display = 'block';
+          });
         }
         styleElement.textContent = better;
       }
@@ -244,7 +281,10 @@
 
       function startInterval() {
         intervalID = setInterval(() => {
-          updateStyle('');
+          document.body.classList.remove('shake-constant', 'shake-crazy');
+          if (over) {
+            updateStyle("* { display: block; }");
+          }
           trollface();
           jumbleText();
           jumbleNumbers();
@@ -284,9 +324,52 @@
         }, intervalTime);
       }
 
+      let beepInterval;
+
+      function getRandom(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      function playRandomBeep() {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        const randomFrequency = Math.random() * (2000 - 200) + 200;
+        oscillator.frequency.setValueAtTime(randomFrequency, audioContext.currentTime);
+        const randomVolume = 0.1
+        gainNode.gain.setValueAtTime(randomVolume, audioContext.currentTime);
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime + getRandom(0.1, 0.5));
+      }
+
+      function startRandomBeeps() {
+        if (beepInterval) {
+          clearInterval(beepInterval);
+        }
+        scheduleNextBeep();
+      }
+
+      function stopRandomBeeps() {
+        if (beepInterval) {
+          clearInterval(beepInterval);
+        }
+      }
+
+      function scheduleNextBeep() {
+        const randomDelay = Math.random() * (120000 - 60000) + 60000;
+
+        beepInterval = setTimeout(() => {
+          playRandomBeep();
+          scheduleNextBeep();
+        }, randomDelay);
+      }
+
       var dowefuckeverythingup = confirm("WARNING:\nThis extension is not your friend. It is not here to help you. It's here to make your experience with the editor as annoying as possible.\nHowever, I'm going to stop myself from running if you save me and load me from a project file, because evil has standards.\n\nWith all this being said, would you like to fuck the editor beyond comprehension?");
       if (dowefuckeverythingup) {
         deleteDivs();
+        startRandomBeeps();
         alert("It has started. I recommend you try coding normally while leaving this extension running in the background, if you didn't see these payloads before. It'll improve your experience.");
         console.log("--POISON PAYLOADS ACTIVATED--");
         startInterval();
