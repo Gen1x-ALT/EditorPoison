@@ -4,6 +4,6 @@ Do you think your PenguinMod editing experience is too basic? Too normal even? W
 
 It's recommended to go through this without seeing the code first, as this extension executes different actions in different order each time you use it.
 
-To do that, you can download it from the file directly without seeing the contents.
-Import unsandboxed.
-[Download Editor Poison](/poison.html){: .btn}
+To do that, you can download it from the file directly without seeing the contents: [Download Editor Poison](/poison.html){: .btn}
+
+Import the extension unsandboxed.
