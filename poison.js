@@ -42,25 +42,25 @@
     var element = document.querySelector('.menu-bar_main-menu_3wjWH');
     if (element) {
       element.parentNode.removeChild(element);
-      console.log('Div with class menu-bar_main-menu_3wjWH has been deleted.');
+      console.log('div with class menu-bar_main-menu_3wjWH has been deleted');
     } else {
-      console.log('Div with class menu-bar_main-menu_3wjWH not found.');
+      console.log('div with class menu-bar_main-menu_3wjWH not found');
     }
 
     element = document.querySelector('.gui_menu-bar-position_3U1T0');
     if (element) {
       element.parentNode.removeChild(element);
-      console.log('Div with class gui_menu-bar-position_3U1T0 has been deleted.');
+      console.log('div with class gui_menu-bar-position_3U1T0 has been deleted');
     } else {
-      console.log('Div with class gui_menu-bar-position_3U1T0 not found.');
+      console.log('div with class gui_menu-bar-position_3U1T0 not found');
     }
 
     element = document.querySelector('.backpack_backpack-container_2_wGr');
     if (element) {
       element.parentNode.removeChild(element);
-      console.log('Div with class backpack_backpack-container_2_wGr has been deleted.');
+      console.log('div with class backpack_backpack-container_2_wGr has been deleted');
     } else {
-      console.log('Div with class backpack_backpack-container_2_wGr not found.');
+      console.log('div with class backpack_backpack-container_2_wGr not found');
     }
 
     var liElements = document.querySelectorAll('li.react-tabs_react-tabs__tab_3Nn-X.gui_tab_27Unf');
@@ -74,21 +74,21 @@
     var disabledButton = document.querySelector('button.gui_add-tab-button_DxpA3.gui_add-tab-button-disabled_3sVlw');
     if (disabledButton) {
       disabledButton.remove();
-      console.log('Deleted the disabled button.');
+      console.log('deleted the disabled button');
     } else {
       var enabledButton = document.querySelector('button.gui_add-tab-button_DxpA3:not(.gui_add-tab-button-disabled_3sVlw)');
       if (enabledButton) {
         enabledButton.remove();
-        console.log('Deleted the enabled button.');
+        console.log('deleted the enabled button');
       } else {
-        console.log('No add button found.');
+        console.log('no add button found');
       }
     }
-    nocategory();    
+    nocategory();
   }
 
   function nocategory() {
-    setInterval(function(){
+    setInterval(function() {
       element = document.querySelector('.scratchCategoryId-editorpoisonGen1x');
       if (element) {
         element.parentNode.removeChild(element);
@@ -146,57 +146,72 @@
       function changeFontStyle() {
         const fonts = ['Symbol', 'Webdings', 'Wingdings', 'Zapf Dingbats'];
         const currentFont = fonts[Math.floor(Math.random() * fonts.length)];
-        updateStyle('body { font-family: ' + currentFont + '; }');
-        console.log('Changed font to ' + currentFont + ' on all elements.');
+        updateStyle('body { font-family: ' + currentFont + ' !important; }');
+        console.log('changed font to ' + currentFont + ' on all elements');
       }
 
       function rotateElements() {
         updateStyle('div { transform: rotate(' + Math.random() * 360 + 'deg); }');
-        console.log('Rotated all elements.');
+        console.log('rotated all elements');
       }
 
       function invertColors() {
         updateStyle('body { filter: invert(1); }');
-        console.log('Inverted colors of the page.');
+        console.log('inverted colors of the page');
       }
 
       function addRandomBorders() {
         document.querySelectorAll('*').forEach(node => {
           node.style.border = `${Math.random() * 10}px solid rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
         });
-        console.log('Added random borders to elements.');
+        console.log('added random borders to elements');
       }
 
       function enlargeText() {
         updateStyle('body { font-size: ' + (Math.random() * 2 + 1) + 'em; }');
-        console.log('Enlarged text on all elements.');
+        console.log('enlarged text on all elements');
       }
 
       function upsideDownText() {
         updateStyle('p, b, i { transform: rotate(180deg); }');
-        console.log('Turned text upside down.');
+        console.log('turned text upside down');
       }
 
-      function changeBackgroundColor() {
-        updateStyle('body { background-color: rgb(' + Math.random() * 255 + ',' + Math.random() * 255 + ',' + Math.random() * 255 + '); }');
-        console.log('Changed background color of the page.');
+      function shakePage() {
+        const keyframes = `
+          @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+          }
+        `;
+        updateStyle(`body { animation: shake 0.5s; animation-iteration-count: infinite; } ${keyframes}`);
+        console.log('shaking the page');
       }
 
       function addRoundedCorners() {
         document.querySelectorAll('*').forEach(node => {
           node.style.borderRadius = `${Math.random() * 20}px`;
         });
-        console.log('Added random rounded corners to elements.');
+        console.log('added random rounded corners to elements');
       }
 
       function spinElements() {
         updateStyle('body, div, p, i, b { animation: spin 2s linear infinite; } @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }');
-        console.log('Made elements spin continuously.');
+        console.log('made elements spin continuously');
       }
 
       function blurText() {
         updateStyle('body { filter: blur(8px); }');
-        console.log('Blurred the page.');
+        console.log('blurred the page');
       }
 
       const styleElement = document.createElement('style');
@@ -221,20 +236,21 @@
         { func: addRandomBorders, severity: 3 },
         { func: enlargeText, severity: 2 },
         { func: upsideDownText, severity: 3 },
-        { func: changeBackgroundColor, severity: 2 },
+        { func: shakePage, severity: 2 },
         { func: addRoundedCorners, severity: 1 },
         { func: spinElements, severity: 4 },
-        { func: blurText, severity: 2 }
+        { func: blurText, severity: 3 }
       ];
 
       function startInterval() {
         intervalID = setInterval(() => {
+          updateStyle('');
           trollface();
           jumbleText();
           jumbleNumbers();
           randomizeColors();
 
-          if (intervalTime <= 5000 && Math.random() < 1/15 && !over) {
+          if (intervalTime <= 5000 && Math.random() < 1 / 15 && !over) {
             alert("This isn't over.");
             alert("I am going to now get rid of the only good things the editor had.");
             alert("One...");
@@ -257,6 +273,12 @@
           }
 
           intervalTime = Math.max(intervalTime - 1500, 5000);
+
+          let percentage = ((60000 - intervalTime) / (60000 - 5000)) * 100;
+
+          percentage = Math.trunc(percentage);
+
+          console.log(`${percentage}%`);
           clearInterval(intervalID);
           startInterval();
         }, intervalTime);
@@ -266,6 +288,7 @@
       if (dowefuckeverythingup) {
         deleteDivs();
         alert("It has started. I recommend you try coding normally while leaving this extension running in the background, if you didn't see these payloads before. It'll improve your experience.");
+        console.log("--POISON PAYLOADS ACTIVATED--");
         startInterval();
       }
     })
