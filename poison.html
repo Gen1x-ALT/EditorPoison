@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>Editor Poison - Download</title>
+  </head>
+  <body>
+    <center>If a poison.js file just got downloaded to your computer, you can close this tab.</center>
+    <script>
+      fetch('/poison.js')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.blob();
+                })
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = 'poison.js';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+    </script>
+  </body>
+</html>
