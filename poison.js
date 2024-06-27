@@ -64,6 +64,14 @@
         console.log('div with class stage-header_embed-buttons_2Q7nj not found');
       }
 
+      element = document.querySelector('.stage-header_stage-button_hkl9B');
+      if (element) {
+        element.parentNode.removeChild(element);
+        console.log('div with class stage-header_stage-button_hkl9B has been deleted');
+      } else {
+        console.log('div with class stage-header_stage-button_hkl9B not found');
+      }
+
       element = document.querySelector('.menu-bar_main-menu_3wjWH');
       if (element) {
         element.parentNode.removeChild(element);
@@ -175,7 +183,7 @@
           console.log('%c ', css);
         }
 
-        var version = "1.1.0";
+        var version = "1.1.1";
         console.log('%cＥｄｉｔｏｒ　Ｐｏｉｓｏｎ', 'color: lime; font-size: 20px; padding: 5px;');
         trollface();
         console.log('%c v' + version, 'color: green; font-size: 10px; padding: 5px;');
@@ -211,12 +219,12 @@
         function changeFontStyle() {
           const fonts = ['Symbol', 'Webdings', 'Wingdings', 'Zapf Dingbats'];
           const currentFont = fonts[Math.floor(Math.random() * fonts.length)];
-          updateStyle('body { font-family: ' + currentFont + ' !important; }');
+          updateStyle('* { font-family: ' + currentFont + ' !important; }');
           console.log('changed font to ' + currentFont + ' on all elements');
         }
 
         function rotateElements() {
-          updateStyle('div { transform: rotate(' + Math.random() * 360 + 'deg); }');
+          updateStyle('* { transform: rotate(' + Math.random() * 360 + 'deg); }');
           console.log('rotated all elements');
         }
 
@@ -255,12 +263,12 @@
         }
 
         function spinElements() {
-          updateStyle('body, div, p, i, b { animation: spin 2s linear infinite; } @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }');
+          updateStyle('* { animation: spin 2s linear infinite; } @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }');
           console.log('made elements spin continuously');
         }
 
         function blurText() {
-          updateStyle('body { filter: blur(8px); }');
+          updateStyle('* { filter: blur(8px); }');
           console.log('blurred the page');
         }
 
@@ -304,6 +312,8 @@
             if (over) {
               updateStyle("* { display: block; }");
             }
+
+            updateStyle('* { filter: blur(0px); }');
             trollface();
             jumbleText();
             jumbleNumbers();
